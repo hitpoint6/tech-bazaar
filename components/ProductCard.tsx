@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProductProps } from "../types/types";
 
 type ProductCardProps = {
@@ -7,10 +8,7 @@ type ProductCardProps = {
 
 function ProductCard({ product, onCardClick }: ProductCardProps) {
   return (
-    <div
-      className="transform transition-transform duration-300 ease-in-out hover:-translate-y-2 cursor-pointer bg-white shadow-md p-4 m-4 rounded-md max-w-xs"
-      onClick={() => onCardClick(product)}
-    >
+    <div className=" bg-white shadow-md p-4 m-4 rounded-md max-w-xs">
       <img
         src={product.image}
         alt={product.name}
@@ -20,6 +18,21 @@ function ProductCard({ product, onCardClick }: ProductCardProps) {
       <p>{product.description}</p>
       <p className="text-lg">${product.price.toFixed(2)}</p>
       <p>Available Quantity: {product.quantity}</p>
+      <div className="flex space-x-4">
+        <button
+          type="button"
+          onClick={() => onCardClick(product)}
+          className="custom_button shift_up_card"
+        >
+          Buy
+        </button>
+        <Link
+          href={`/products/${product._id}/update`}
+          className="custom_button-outline"
+        >
+          Update
+        </Link>
+      </div>
     </div>
   );
 }

@@ -29,5 +29,13 @@
 }
 
 .custom_button {
-  @apply block bg-reebelo-blue py-2 px-4 rounded-md mt-2
+  @apply block bg-black text-white py-2 px-4 rounded-md mt-2
+  }
+  
+  .custom_button-outline {
+    @apply block bg-white text-black outline outline-black py-2 px-4 rounded-md mt-2
+  }
+  
+  .shift_up_card {
+    @apply transform transition-transform duration-300 ease-in-out hover:-translate-y-2 cursor-pointer
 }

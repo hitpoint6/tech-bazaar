@@ -1,60 +1,53 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ProductProps } from "@/types/types";
 
-function NewProductForm() {
+type ProductFormProps = {
+  type: string;
+  initialData: ProductProps;
+  onSubmit: (product: ProductProps) => void;
+  isSubmitting: boolean;
+};
+
+function ProductForm({
+  type,
+  initialData,
+  onSubmit,
+  isSubmitting,
+}: ProductFormProps) {
   const router = useRouter();
-  const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    price: 1,
-    image: "",
-    quantity: 1,
-  });
-  const [submitting, setIsSubmitting] = useState(false);
+  const [product, setProduct] = useState<ProductProps>(initialData);
+
+  useEffect(() => {
+    setProduct(initialData);
+  }, [initialData]);
+
   const [error, setError] = useState({ image: "" });
-  const validateImageUrl = (url: string) => {
+  function validateImageUrl(url: string) {
     const pattern = /^https:\/\//;
     return pattern.test(url);
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
+
+    if (name === "image" && !validateImageUrl(value)) {
+      setError({ ...error, image: "Image URL must start with https://" });
+    } else {
+      setError({ ...error, image: "" });
+    }
   };
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!validateImageUrl(product.image)) {
-      setError({
-        image: 'Invalid image URL. Must start with "https://".',
-      });
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/products/new`, {
-        method: "POST",
-        body: JSON.stringify(product),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        router.push("/");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-    setError({ image: "" });
-  }
 
   function handleClose() {
     router.push("/");
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    onSubmit(product);
+    setError({ image: "" });
   }
 
   return (
@@ -111,8 +104,8 @@ function NewProductForm() {
         />
       </label>
       <div className="flex space-x-4">
-        <button type="submit" disabled={submitting} className="custom_button">
-          {submitting ? "submitting...." : "Add Product"}
+        <button type="submit" disabled={isSubmitting} className="custom_button">
+          {isSubmitting ? "submitting...." : `${type} Product`}
         </button>
         <button onClick={handleClose} className="block mt-2">
           Close
@@ -122,4 +115,4 @@ function NewProductForm() {
   );
 }
 
-export default NewProductForm;
+export default ProductForm;
