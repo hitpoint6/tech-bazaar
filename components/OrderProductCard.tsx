@@ -8,17 +8,17 @@ type OrderProductCardProps = {
 
 function OrderProductCard(order: OrderProductCardProps) {
   return (
-    <>
+    <section className="my-4">
       <img
         src={order.image}
         alt={order.productName}
-        className="rounded-md w-32 h-32 object-cover mb-4"
+        className="rounded-md w-32 h-32 object-cover my-5"
       />{" "}
       <p>Product ID: {order.productId}</p>
       <p>Product Name: {order.productName}</p>
       <p>Quantity: {order.quantity}</p>
       <p>Order total: ${order.price.toFixed(2)}</p>
-    </>
+    </section>
   );
 }
 

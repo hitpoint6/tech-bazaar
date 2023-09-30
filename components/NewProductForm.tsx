@@ -50,7 +50,6 @@ function NewProductForm() {
     } finally {
       setIsSubmitting(false);
     }
-    console.log(product);
     setError({ image: "" });
   }
 

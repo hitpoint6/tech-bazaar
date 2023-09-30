@@ -24,7 +24,6 @@ const OrderSchema = new Schema<IOrder>({
   status: { type: String, default: "Pending" },
   createdAt: {
     type: String,
-    default: new Date().toISOString(),
   },
   updatedAt: { type: String },
 });

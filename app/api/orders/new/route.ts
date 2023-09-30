@@ -5,11 +5,10 @@ export const POST = async (request: Request) => {
   const { productId, productName, productImage, price, quantity } =
     await request.json();
 
-  console.log("$$$$$$4", productId, productName, productImage, price, quantity);
-
   try {
     await connectToDB();
-    console.log(productId, quantity);
+    const createdAt = new Date().toISOString();
+    console.log(createdAt);
 
     const order = await Order.create({
       productId,
@@ -17,6 +16,7 @@ export const POST = async (request: Request) => {
       productName,
       productImage,
       price,
+      createdAt,
     });
 
     return new Response(JSON.stringify(order), { status: 200 });

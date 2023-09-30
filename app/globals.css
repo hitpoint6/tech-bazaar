@@ -21,13 +21,13 @@
 }
 
 .input_field {
-  @apply border p-1 w-full mt-2
+  @apply border p-1 w-full mt-2 rounded-sm
 }
 
 .input_label {
-  @apply block mb-5
+  @apply block mb-5 text-sm
 }
 
 .custom_button {
-  @apply block bg-reebelo-blue p-2 rounded-md mt-2
+  @apply block bg-reebelo-blue py-2 px-4 rounded-md mt-2
 }

@@ -15,8 +15,6 @@ export async function GET(request: any, params: any) {
 
 export const PATCH = async (request: any, params: any) => {
   const data = await request.json();
-  console.log(data);
-
   try {
     await connectToDB();
 
