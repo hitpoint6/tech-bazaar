@@ -1,5 +1,6 @@
 import { OrderProps } from "@/types/types";
 import { useRouter } from "next/navigation";
+import OrderProductCard from "./OrderProductCard";
 
 type OrderCardProps = {
   order: OrderProps;
@@ -14,8 +15,16 @@ function OrderCard({ order }: OrderCardProps) {
 
   return (
     <div className="border p-4 mb-4 rounded-md">
-      <p>Product ID: {order.productId}</p>
-      <p>Order Quantity: {order.quantity}</p>
+      <p>Order ID: {order._id}</p>
+      <OrderProductCard
+        image={order.productImage}
+        productId={order.productId}
+        productName={order.productName}
+        quantity={order.quantity}
+        price={order.price}
+      />
+      <p>Created at: {order.createdAt}</p>
+      <p>Updated at: {order.updatedAt}</p>
       <p>Shipping Company: {order.shippingCompany}</p>
       <p>Tracking Number: {order.trackingNumber}</p>
       <p>Status: {order.status}</p>

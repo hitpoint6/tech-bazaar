@@ -19,3 +19,15 @@
 .content {
   @apply mx-auto max-w-7xl p-4 mt-4 bg-white
 }
+
+.input_field {
+  @apply border p-1 w-full mt-2
+}
+
+.input_label {
+  @apply block mb-5
+}
+
+.custom_button {
+  @apply block bg-reebelo-blue p-2 rounded-md mt-2
+}

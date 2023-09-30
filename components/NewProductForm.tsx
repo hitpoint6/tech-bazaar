@@ -54,66 +54,71 @@ function NewProductForm() {
     setError({ image: "" });
   }
 
+  function handleClose() {
+    router.push("/");
+  }
+
   return (
     <form onSubmit={handleSubmit} className="p-4 max-w-2xl">
-      <label className="block mb-2">
+      <label className="input_label">
         Name:
         <input
           type="text"
           name="name"
           value={product.name}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Description:
         <input
           type="text"
           name="description"
           value={product.description}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Price $:
         <input
           type="number"
           name="price"
           value={product.price}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Image URL:
         <input
           type="text"
           name="image"
           value={product.image}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
         {error.image && <p className="text-red-500 text-xs">{error.image}</p>}
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Quantity:
         <input
           type="number"
           name="quantity"
           value={product.quantity}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <button
-        type="submit"
-        disabled={submitting}
-        className="bg-reebelo-blue p-2 rounded-md"
-      >
-        {submitting ? "submitting...." : "Add Product"}
-      </button>
+      <div className="flex space-x-4">
+        <button type="submit" disabled={submitting} className="custom_button">
+          {submitting ? "submitting...." : "Add Product"}
+        </button>
+        <button onClick={handleClose} className="block mt-2">
+          Close
+        </button>
+      </div>
     </form>
   );
 }

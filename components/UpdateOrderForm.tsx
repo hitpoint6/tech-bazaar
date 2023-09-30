@@ -1,19 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
-import { OrderStatus } from "@/types/types";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import OrderProductCard from "./OrderProductCard";
+import { OrderProps } from "@/types/types";
 
 function UpdateOrderForm() {
   const router = useRouter();
   const { orderId } = useParams();
-  const [order, setOrder] = useState({
-    orderId: orderId,
+  const [order, setOrder] = useState<OrderProps>({
+    _id: "",
     productId: "",
+    productName: "",
+    productImage: "",
+    price: 0,
     quantity: 0,
     shippingCompany: "",
     trackingNumber: "",
-    status: "Pending" as OrderStatus,
+    status: "Pending",
   });
 
   const [submitting, setIsSubmitting] = useState(false);
@@ -22,15 +25,7 @@ function UpdateOrderForm() {
     const orderRes = await fetch(`/api/orders/${orderId}`);
     const orderData = await orderRes.json();
 
-    const newData = {
-      orderId: orderId,
-      productId: orderData.productId,
-      quantity: orderData.quantity,
-      shippingCompany: orderData.shippingCompany || "",
-      trackingNumber: orderData.trackingNumber || "",
-      status: orderData.status || "",
-    };
-    setOrder(newData);
+    setOrder(orderData);
   }
 
   useEffect(() => {
@@ -47,7 +42,7 @@ function UpdateOrderForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/orders/update`, {
+      const response = await fetch(`/api/orders/${orderId}`, {
         method: "PATCH",
         body: JSON.stringify(order),
         headers: {
@@ -65,56 +60,47 @@ function UpdateOrderForm() {
     }
   }
 
+  function handleClose() {
+    router.push("/orders");
+  }
+
   return (
     <form onSubmit={handleSubmit} className="p-4 max-w-2xl">
-      <label className="block mb-2">
-        Order ID:
-        <input
-          type="text"
-          name="orderId"
-          value={order.productId}
-          className="border p-1 w-full"
-          disabled
-        />
-      </label>
-      <label className="block mb-2">
-        Quantity:
-        <input
-          type="text"
-          name="quantity"
-          value={order.quantity}
-          className="border p-1 w-full"
-          disabled
-        />
-      </label>
-
-      <label className="block mb-2">
+      <p>Order Id: {order._id}</p>
+      <OrderProductCard
+        image={order.productImage}
+        productId={order.productId}
+        productName={order.productName}
+        quantity={order.quantity}
+        price={order.price}
+      />
+      <label className="input_label">
         Shipping Company:
         <input
           type="text"
           name="shippingCompany"
           value={order.shippingCompany}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Tracking Number:
         <input
           type="text"
           name="trackingNumber"
           value={order.trackingNumber}
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         />
       </label>
-      <label className="block mb-2">
+      <label className="input_label">
         Status:
         <select
           value={order.status}
           name="status"
           onChange={handleChange}
-          className="border p-1 w-full"
+          className="input_field"
         >
           <option value="Pending">Pending</option>
           <option value="Shipped">Shipped</option>
@@ -122,13 +108,14 @@ function UpdateOrderForm() {
           <option value="Cancelled">Cancelled</option>
         </select>
       </label>
-      <button
-        type="submit"
-        disabled={submitting}
-        className="block bg-reebelo-blue p-2 rounded-md mt-2"
-      >
-        {submitting ? "submitting...." : "Update Order"}
-      </button>
+      <div className="flex space-x-4">
+        <button type="submit" disabled={submitting} className="custom_button">
+          {submitting ? "submitting...." : "Update Order"}
+        </button>
+        <button onClick={handleClose} className="block mt-2">
+          Close
+        </button>
+      </div>
     </form>
   );
 }

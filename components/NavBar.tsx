@@ -11,11 +11,11 @@ function NavBar() {
             </p>
           </Link>
           <div className="flex space-x-4">
-            <Link href="/products/new">
-              <p>New Product</p>
-            </Link>
             <Link href="/">
               <p>Products</p>
+            </Link>
+            <Link href="/products/new">
+              <p>Add Product</p>
             </Link>
             <Link href="/orders">
               <p>Orders</p>
