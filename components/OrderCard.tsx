@@ -14,26 +14,30 @@ function OrderCard({ order }: OrderCardProps) {
   }
 
   return (
-    <div className="border p-4 mb-4 rounded-md">
-      <p>Order ID: {order._id}</p>
-      <OrderProductCard
-        image={order.productImage}
-        productId={order.productId}
-        productName={order.productName}
-        quantity={order.quantity}
-        price={order.price}
-      />
-      <p>Created at: {order.createdAt}</p>
-      <p>Updated at: {order.updatedAt}</p>
-      <p>Shipping Company: {order.shippingCompany}</p>
-      <p>Tracking Number: {order.trackingNumber}</p>
-      <p>Status: {order.status}</p>
-      <button
-        onClick={handleUpdateClick}
-        className="block bg-reebelo-blue p-2 rounded-md mt-2"
-      >
-        Update
-      </button>
+    <div className="flex border p-4 mb-4 rounded-md">
+      <div className="flex-none w-1/3 mr-4">
+        <OrderProductCard
+          image={order.productImage}
+          productId={order.productId}
+          productName={order.productName}
+          quantity={order.quantity}
+          price={order.price}
+        />
+      </div>
+      <div className="flex-1">
+        <p>Order ID: {order._id}</p>
+        <p>Created at: {order.createdAt}</p>
+        <p>Updated at: {order.updatedAt}</p>
+        <p>Shipping Company: {order.shippingCompany}</p>
+        <p>Tracking Number: {order.trackingNumber}</p>
+        <p>Status: {order.status}</p>
+        <button
+          onClick={handleUpdateClick}
+          className="block bg-reebelo-blue p-2 rounded-md mt-2"
+        >
+          Update
+        </button>
+      </div>
     </div>
   );
 }

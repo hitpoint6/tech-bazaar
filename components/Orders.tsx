@@ -6,15 +6,39 @@ import { useState, useEffect } from "react";
 
 function Orders() {
   const [allOrders, setAllOrders] = useState<OrderProps[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(10);
 
   async function getOrders() {
-    const response = await fetch("/api/orders");
+    const response = await fetch(`/api/orders?page=${page}&limit=2`);
     const data = await response.json();
-    setAllOrders(data);
+    setTotalPages(data.totalPages);
+    setAllOrders((prevOrders) => [...prevOrders, ...data.orders]);
   }
 
   useEffect(() => {
     getOrders();
+  }, [page]);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight
+    ) {
+      setTimeout(function () {
+        if (page < totalPages) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
