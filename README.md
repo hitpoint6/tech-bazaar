@@ -15,7 +15,7 @@ Live demo is up at
 ## Stack
 
 - Using new **Next.js 13**
-- Nextjs **API Routes** for the backend
+- Nextjs **App Router**
 - **MongoDB** Cloud Atlas
 - Styled using **Tailwind CSS**
 - Written in **TypeScript**

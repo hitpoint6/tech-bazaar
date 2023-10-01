@@ -1,3 +1,5 @@
+"use client";
+
 import { OrderProps } from "@/types/types";
 import { useRouter } from "next/navigation";
 import OrderProductCard from "./OrderProductCard";

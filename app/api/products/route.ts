@@ -1,16 +1,13 @@
 import { connectToDB } from "@/utils/database";
 import { Product } from "@/models/Product";
+import { NextRequest } from "next/server";
 
-export const GET = async (req: any) => {
+export const GET = async (request: NextRequest) => {
   try {
     await connectToDB();
 
-    const { URL } = require("url");
-    const url = new URL(req.url);
-
-    const page = parseInt(url.searchParams.get("page"), 10) || 1;
-    console.log("page", page);
-    const limit = parseInt(url.searchParams.get("limit"), 10) || 10;
+    const page = parseInt(request.nextUrl.searchParams.get("page") || "1");
+    const limit = parseInt(request.nextUrl.searchParams.get("limit") || "10");
 
     const skip = (page - 1) * limit;
     const products = await Product.find({}).skip(skip).limit(limit);
