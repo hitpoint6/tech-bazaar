@@ -50,7 +50,8 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
       });
 
       if (response.ok) {
-        router.push("/orders");
+        const data = await response.json();
+        router.push(`/orders/${data._id}`);
       }
     } catch (error) {
       console.log(error);

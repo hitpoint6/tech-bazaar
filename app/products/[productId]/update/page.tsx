@@ -45,7 +45,8 @@ function UpdateProductPage({ params }: { params: { productId: string } }) {
       });
 
       if (response.ok) {
-        router.push("/");
+        const data = await response.json();
+        router.push(`/products/${data._id}`);
       }
     } catch (error) {
       console.log(error);

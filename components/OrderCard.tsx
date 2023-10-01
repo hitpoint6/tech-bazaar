@@ -3,6 +3,7 @@
 import { OrderProps } from "@/types/types";
 import { useRouter } from "next/navigation";
 import OrderProductCard from "./OrderProductCard";
+import Link from "next/link";
 
 type OrderCardProps = {
   order: OrderProps;
@@ -33,12 +34,17 @@ function OrderCard({ order }: OrderCardProps) {
         <p>Shipping Company: {order.shippingCompany}</p>
         <p>Tracking Number: {order.trackingNumber}</p>
         <p>Status: {order.status}</p>
-        <button
-          onClick={handleUpdateClick}
-          className="block bg-reebelo-blue p-2 rounded-md mt-2"
-        >
-          Update
-        </button>
+        <div className="flex space-x-4">
+          <button
+            onClick={handleUpdateClick}
+            className="block bg-reebelo-blue p-2 rounded-md mt-2"
+          >
+            Update
+          </button>
+          <Link href={`/orders/${order._id}`} className="custom_button_outline">
+            <p>Order Details</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

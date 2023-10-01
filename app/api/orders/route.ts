@@ -1,5 +1,5 @@
-import { connectToDB } from "@/utils/database";
-import { Order } from "@/models/Order";
+import { connectToDB } from "@/database/database";
+import { Order } from "@/database/Order";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {

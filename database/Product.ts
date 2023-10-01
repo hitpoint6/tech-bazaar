@@ -6,6 +6,8 @@ export interface IProduct {
   price: number;
   image: string;
   quantity: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const ProductSchema = new Schema<IProduct>({
@@ -14,6 +16,10 @@ const ProductSchema = new Schema<IProduct>({
   description: { type: String },
   quantity: { type: Number, required: true },
   image: { type: String },
+  createdAt: {
+    type: String,
+  },
+  updatedAt: { type: String },
 });
 
 export const Product =

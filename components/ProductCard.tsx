@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ProductProps } from "../types/types";
-import Modal from "@/components/Modal";
+import Modal from "@/components/CreateOrderModal";
 import { useState } from "react";
 
 type ProductCardProps = {
@@ -21,7 +21,7 @@ function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className=" bg-white shadow-md p-4 m-4 rounded-md max-w-xs">
+    <div className=" bg-white shadow-md p-4 m-4 rounded-md max-w-sm w-full">
       <img
         src={product.image}
         alt={product.name}
@@ -41,9 +41,15 @@ function ProductCard({ product }: ProductCardProps) {
         </button>
         <Link
           href={`/products/${product._id}/update`}
-          className="custom_button-outline"
+          className="custom_button_outline"
         >
           Update
+        </Link>
+        <Link
+          href={`/products/${product._id}`}
+          className="custom_button_outline"
+        >
+          Detail
         </Link>
       </div>
       {showModal && (

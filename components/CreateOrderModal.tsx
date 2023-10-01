@@ -69,7 +69,8 @@ function Modal({ product, onClose, showModal }: ModalProps) {
       });
 
       if (productRes.ok) {
-        router.push("/orders");
+        const data = await response.json();
+        router.push(`/orders/${data._id}`);
       }
     } catch (error) {
       console.log(error);

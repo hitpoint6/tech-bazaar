@@ -1,41 +1,16 @@
-// import Products from "@/components/Products";
-// import Header from "@/components/Header";
-
-// export default function Home() {
-//   return (
-//     <section className="container mx-auto">
-//       <Header title="Products" />
-//       <Products />
-//     </section>
-//   );
-// }
-
 import Header from "@/components/Header";
 import Products from "@/components/Products";
-import { connectToDB } from "@/utils/database";
-import { Product } from "@/models/Product";
 import PageNavigation from "@/components/PageNavigation";
 
-async function getProducts(page: number, limit: number) {
-  await connectToDB();
-  const skip = (page - 1) * limit;
+async function getData(page: number, limit: number) {
+  const res = await fetch(
+    `${process.env.HOST_DOMAIN}/api/products?page=${page}&limit=${limit}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-  const data = await Product.find({}).skip(skip).limit(limit);
-
-  const products = data.map((doc) => {
-    const product = doc.toObject();
-    product._id = product._id.toString();
-    return product;
-  });
-
-  return products;
-}
-
-async function getTotalProductPages(limit: number) {
-  await connectToDB();
-  const total = await Product.countDocuments();
-  const totalPages = Math.ceil(total / limit);
-  return totalPages;
+  return res.json();
 }
 
 export default async function Home({
@@ -49,8 +24,7 @@ export default async function Home({
   const limit =
     typeof searchParams.limit === "string" ? parseInt(searchParams.limit) : 2;
 
-  const products = await getProducts(page, limit);
-  const totalPages = await getTotalProductPages(limit);
+  const { products, totalPages } = await getData(page, limit);
 
   return (
     <section className="container mx-auto">

@@ -1,29 +1,16 @@
 import Orders from "@/components/Orders";
 import Header from "@/components/Header";
-import { connectToDB } from "@/utils/database";
-import { Order } from "@/models/Order";
 import PageNavigation from "@/components/PageNavigation";
 
-async function getOrders(page: number, limit: number) {
-  await connectToDB();
-  const skip = (page - 1) * limit;
+async function getData(page: number, limit: number) {
+  const res = await fetch(
+    `${process.env.HOST_DOMAIN}/api/orders?page=${page}&limit=${limit}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-  const data = await Order.find({}).skip(skip).limit(limit);
-
-  const orders = data.map((doc) => {
-    const order = doc.toObject();
-    order._id = order._id.toString();
-    return order;
-  });
-
-  return orders;
-}
-
-async function getTotalOrderPages(limit: number) {
-  await connectToDB();
-  const total = await Order.countDocuments();
-  const totalPages = Math.ceil(total / limit);
-  return totalPages;
+  return res.json();
 }
 
 export default async function OrdersPage({
@@ -37,8 +24,7 @@ export default async function OrdersPage({
   const limit =
     typeof searchParams.limit === "string" ? parseInt(searchParams.limit) : 2;
 
-  const orders = await getOrders(page, limit);
-  const totalPages = await getTotalOrderPages(limit);
+  const { orders, totalPages } = await getData(page, limit);
 
   return (
     <section className="container mx-auto">
