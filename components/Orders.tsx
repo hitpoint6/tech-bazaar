@@ -10,7 +10,7 @@ function Orders() {
   const [totalPages, setTotalPages] = useState<number>(10);
 
   async function getOrders() {
-    const response = await fetch(`/api/orders?page=${page}&limit=2`);
+    const response = await fetch(`/api/orders?page=${page}&limit=10`);
     const data = await response.json();
     setTotalPages(data.totalPages);
     setAllOrders((prevOrders) => [...prevOrders, ...data.orders]);
@@ -25,11 +25,9 @@ function Orders() {
       window.innerHeight + window.scrollY >=
       document.documentElement.scrollHeight
     ) {
-      setTimeout(function () {
-        if (page < totalPages) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      }, 1000);
+      if (page < totalPages) {
+        setPage((prevPage) => prevPage + 1);
+      }
     }
   };
 

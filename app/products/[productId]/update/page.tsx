@@ -6,9 +6,9 @@ import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ProductProps } from "@/types/types";
 
-function UpdateProductPage() {
+function UpdateProductPage({ params }: { params: { productId: string } }) {
   const router = useRouter();
-  const { productId } = useParams();
+  const productId = params.productId;
   const [product, setProduct] = useState<ProductProps>({
     _id: "",
     name: "",

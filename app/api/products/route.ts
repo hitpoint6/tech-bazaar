@@ -4,6 +4,7 @@ import { Product } from "@/models/Product";
 export const GET = async (req: any) => {
   try {
     await connectToDB();
+
     const { URL } = require("url");
     const url = new URL(req.url);
 

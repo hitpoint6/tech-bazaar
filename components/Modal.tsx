@@ -8,21 +8,21 @@ type ModalProps = {
 };
 
 function Modal({ product, onClose }: ModalProps) {
-  if (!product) return null;
-
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [order, setOrder] = useState<OrderProps>({
     _id: "",
-    productId: product._id,
-    productName: product.name,
-    productImage: product.image,
-    price: product.price * 1,
+    productId: "",
+    productName: "",
+    productImage: "",
+    price: 0,
     quantity: 1,
     shippingCompany: "",
     trackingNumber: "",
     status: "Pending",
   });
+
+  if (!product) return null;
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

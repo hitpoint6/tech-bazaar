@@ -4,9 +4,8 @@ import { useRouter, useParams } from "next/navigation";
 import OrderProductCard from "./OrderProductCard";
 import { OrderProps } from "@/types/types";
 
-function UpdateOrderForm() {
+function UpdateOrderForm({ orderId }: { orderId: string }) {
   const router = useRouter();
-  const { orderId } = useParams();
   const [order, setOrder] = useState<OrderProps>({
     _id: "",
     productId: "",
