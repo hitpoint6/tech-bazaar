@@ -14,8 +14,8 @@ function OrderCard({ order }: OrderCardProps) {
   }
 
   return (
-    <div className="flex border p-4 mb-4 rounded-md">
-      <div className="flex-none w-1/3 mr-4">
+    <div className="flex flex-col md:flex-row border p-4 mb-4 rounded-md">
+      <div className="flex-none md:w-1/3 mb-4 md:mb-0 md:mr-4">
         <OrderProductCard
           image={order.productImage}
           productId={order.productId}

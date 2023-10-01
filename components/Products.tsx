@@ -1,7 +1,6 @@
 "use client";
 
 import ProductCard from "@/components/ProductCard";
-import Modal from "@/components/Modal";
 import { ProductProps } from "@/types/types";
 import { useState, useEffect } from "react";
 
@@ -39,18 +38,6 @@ function Products() {
     };
   }, []);
 
-  const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
-    null
-  );
-
-  const handleCardClick = (product: ProductProps) => {
-    setSelectedProduct(product);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProduct(null);
-  };
-
   return (
     <>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -59,10 +46,10 @@ function Products() {
             <ProductCard
               key={product?._id}
               product={product}
-              onCardClick={handleCardClick}
+              // onCardClick={handleCardClick}
+              // onClose={handleCloseModal}
             />
           ))}
-        <Modal product={selectedProduct} onClose={handleCloseModal} />
       </section>
     </>
   );

@@ -1,13 +1,17 @@
 import { OrderProps, ProductProps } from "@/types/types";
+import { set } from "mongoose";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 type ModalProps = {
-  product: ProductProps | null;
+  product: ProductProps;
   onClose: () => void;
+  showModal: boolean;
 };
 
-function Modal({ product, onClose }: ModalProps) {
+function Modal({ product, onClose, showModal }: ModalProps) {
+  console.log("showModal", showModal);
+
   const router = useRouter();
   const [submitting, setIsSubmitting] = useState(false);
   const [order, setOrder] = useState<OrderProps>({
@@ -22,7 +26,15 @@ function Modal({ product, onClose }: ModalProps) {
     status: "Pending",
   });
 
-  if (!product) return null;
+  useEffect(() => {
+    setOrder({
+      ...order,
+      productId: product._id,
+      productName: product.name,
+      productImage: product.image,
+      price: product.price,
+    });
+  }, [product]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,10 +44,13 @@ function Modal({ product, onClose }: ModalProps) {
   };
 
   async function handleSubmit(e: React.FormEvent) {
-    if (!product) return;
-    console.log(order);
-
     e.preventDefault();
+    const remain = product.quantity - order.quantity;
+    if (remain < 0) {
+      alert("Not enough stock");
+      return;
+    }
+    setIsSubmitting(true);
     try {
       const response = await fetch(`/api/orders/new`, {
         method: "POST",
@@ -45,11 +60,9 @@ function Modal({ product, onClose }: ModalProps) {
         },
       });
 
-      product.quantity -= order.quantity;
-
       const productRes = await fetch(`/api/products/${product._id}`, {
         method: "PATCH",
-        body: JSON.stringify(product),
+        body: JSON.stringify({ ...product, quantity: remain }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -66,7 +79,11 @@ function Modal({ product, onClose }: ModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+    <div
+      className={
+        "fixed inset-0 flex items-center justify-center z-50 bg-gray-700 bg-opacity-50"
+      }
+    >
       <div className="bg-white p-8 rounded-md shadow-lg w-3/4 max-w-lg">
         <h3 className="text-lg font-semibold">{product.name}</h3>
         <p className="text-lg">${product.price}</p>
@@ -93,7 +110,7 @@ function Modal({ product, onClose }: ModalProps) {
             >
               {submitting ? "submitting...." : "Buy"}
             </button>
-            <button onClick={onClose} className="block mt-2">
+            <button type="button" onClick={onClose} className="block mt-2">
               Close
             </button>
           </div>

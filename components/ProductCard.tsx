@@ -1,12 +1,23 @@
 import Link from "next/link";
 import { ProductProps } from "../types/types";
+import Modal from "@/components/Modal";
+import { useState } from "react";
 
 type ProductCardProps = {
   product: ProductProps;
-  onCardClick: (product: ProductProps) => void;
 };
 
-function ProductCard({ product, onCardClick }: ProductCardProps) {
+function ProductCard({ product }: ProductCardProps) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleBuyClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className=" bg-white shadow-md p-4 m-4 rounded-md max-w-xs">
       <img
@@ -21,7 +32,7 @@ function ProductCard({ product, onCardClick }: ProductCardProps) {
       <div className="flex space-x-4">
         <button
           type="button"
-          onClick={() => onCardClick(product)}
+          onClick={handleBuyClick}
           className="custom_button shift_up_card"
         >
           Buy
@@ -33,6 +44,13 @@ function ProductCard({ product, onCardClick }: ProductCardProps) {
           Update
         </Link>
       </div>
+      {showModal && (
+        <Modal
+          product={product}
+          onClose={handleCloseModal}
+          showModal={showModal}
+        />
+      )}
     </div>
   );
 }
