@@ -1,5 +1,5 @@
 type OrderProductCardProps = {
-  image: string;
+  productImage: string;
   productId: string;
   productName: string;
   quantity: number;
@@ -10,7 +10,7 @@ function OrderProductCard(order: OrderProductCardProps) {
   return (
     <section className="my-4">
       <img
-        src={order.image}
+        src={order.productImage}
         alt={order.productName}
         className="rounded-md w-32 h-32 object-cover my-5"
       />{" "}

@@ -1,5 +1,5 @@
-import { connectToDB } from "@/utils/database";
-import { Order } from "@/models/Order";
+import { connectToDB } from "@/database/database";
+import { Order } from "@/database/Order";
 
 export const GET = async (req: any) => {
   try {
@@ -8,12 +8,13 @@ export const GET = async (req: any) => {
     const url = new URL(req.url);
 
     const page = parseInt(url.searchParams.get("page"), 10) || 1;
-    console.log("page", page);
-
     const limit = parseInt(url.searchParams.get("limit"), 10) || 10;
 
     const skip = (page - 1) * limit;
-    const orders = await Order.find({}).skip(skip).limit(limit);
+    const orders = await Order.find({})
+      .sort("-createdAt")
+      .skip(skip)
+      .limit(limit);
 
     const total = await Order.countDocuments();
     const totalPages = Math.ceil(total / limit);

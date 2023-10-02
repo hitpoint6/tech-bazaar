@@ -30,7 +30,8 @@ function NewProductPage() {
       });
 
       if (response.ok) {
-        router.push("/");
+        const productData = await response.json();
+        router.push(`/products/${productData._id}`);      
       }
     } catch (error) {
       console.log(error);

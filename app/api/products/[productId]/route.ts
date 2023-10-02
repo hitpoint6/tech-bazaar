@@ -1,5 +1,5 @@
-import { connectToDB } from "@/utils/database";
-import { Product } from "@/models/Product";
+import { connectToDB } from "@/database/database";
+import { Product } from "@/database/Product";
 
 export async function GET(request: any, params: any) {
   try {
@@ -19,22 +19,23 @@ export const PATCH = async (request: any, params: any) => {
     await connectToDB();
 
     // Find the existing prompt by ID
-    const existingProduct = await Product.findById(params.params.productId);
+    const product = await Product.findById(params.params.productId);
 
-    if (!existingProduct) {
+    if (!product) {
       return new Response("Order not found", { status: 404 });
     }
 
     // Update the prompt with new data
-    existingProduct.name = data.name;
-    existingProduct.description = data.description;
-    existingProduct.price = data.price;
-    existingProduct.image = data.image;
-    existingProduct.quantity = data.quantity;
+    product.name = data.name;
+    product.description = data.description;
+    product.price = data.price;
+    product.image = data.image;
+    product.quantity = data.quantity;
+    product.updatedAt = new Date().toISOString();
 
-    await existingProduct.save();
+    await product.save();
 
-    return new Response("Successfully updated the Product", { status: 200 });
+    return new Response(JSON.stringify(product), { status: 200 });
   } catch (error) {
     console.log(error);
     return new Response("Error Updating Product", { status: 500 });
