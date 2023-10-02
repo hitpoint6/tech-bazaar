@@ -46,7 +46,7 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
   - **Followup Features**  
     - Consider adding security features like authentication, authorization, data validation.
     - Monitoring and Logging
-    - Unit testing
+    - Unit testing and end-to-end testings
     - CI/CD
     
      
