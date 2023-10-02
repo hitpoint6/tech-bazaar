@@ -40,16 +40,18 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
 - Choice of frontend technology. (hosting, caching, language, frameworks, styling)
   - Typescript allows static type checking compared to Javascript, which can help developers identify bugs earlier.
     It improves robustness and it is great for team development. 
-  - Nextjs is a react framework with server-side rendering (SSR) and file base routing. SSR enables faster initial website loading speed and better SEO.
-    It also caches server-side components for faster loading without needing to hit the database.
-    File base routing is easy to reason about than react router dom. It is also a full stack framework that allows you to build the front end backend in the same framework.
+  - Nextjs is a full stack react framework with useful features like server-side rendering (SSR) and file base routing.
+    SSR enables faster initial website loading speed and better SEO.
+    It also caches server-side components for faster loading without the need to hit the database.
+    File base routing is easy to reason about compared to react router dom.
+  - We can update products and orders components into Server side rendering (SSR) components. The HTML are generated on the server then served on the frontend.
+    After create and update form submission, the related /products or /orders list cache are invalidated using revalidatepath to serve fresh data.
   - Tailwind CSS is a popular utility-first CSS framework. It allows rapid development as well as high level of flexibility.
     However it might make HTML clunky with a lot of classes.
   - Vercel. Vercel is serverless cloud platform has great integration with Nextjs. It can deploy a nextjs project with a few lines of code.
     It connects github repo and can automatically detect new commits on the repo and redeploy. While simplicity is the advantage, it is lack of configuration options.
     For more complex deployment, AWS of GCP can be considered.
-  - There is a pull request with Server side rendering (SSR) product lists and order lists in the repo. The HTML are generated on the server then served on the frontend.
-    After create and update form submission, the related /products or /orders list cache are invalidated using revalidatepath to serve fresh data.
+
     
 
 ## Followup
