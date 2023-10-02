@@ -26,8 +26,8 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
 - Scaling of the backend.
   - The backend APIs are implemented in Nextjs's App Router. When building full stack with nextjs compared to nodejs + nextjs,
     many duplicate code can be removed or reused.
-  - Typescript. Developing the frontend and backend in the same language can reduce context switch of full stack developers jumping between services.
-    It utilize event driven and non-blocking I/O, which is great for web servers and real-time applications.
+  - Typescript and Nodejs. Developing the frontend and backend in the same language can reduce context switch of full stack developers jumping between services.
+    Nodejs utilize event driven and non-blocking I/O, which is great for web servers and real-time applications.
   - NoSQL database like mongodb allows for horizontal scaling or products and orders. Cloud Atlas mongodb allows for automatically scaling.
     It does not have schema can be great for initial development as new fields are added to models.
     However it is lack of ACID of SQL database and could potentially lead to duplicate orders. SQL databases should be partitioned when dealing
@@ -35,7 +35,7 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
   - Serverless web servers like vercel allows automatically scale up and down by the amount of traffic.
   - Implement pagination and infinite scroll can make sure the backend returns a manageable amount of items for each query.
     However, it might be overwhelming for users to find a product. Categorization of products and search can be implemented to improve scalability.
-    <br>
+     
 - Choice of frontend technology. (hosting, caching, language, frameworks, styling)
   - Typescript allows static type checking compared to Javascript, which can help developers identify bugs earlier.
     It improves robustness and it is great for team development. 
@@ -47,6 +47,9 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
   - Vercel. Vercel is serverless cloud platform has great integration with Nextjs. It can deploy a nextjs project with a few lines of code.
     It connects github repo and can automatically detect new commits on the repo and redeploy. While simplicity is the advantage, it is lack of configuration options.
     For more complex deployment, AWS of GCP can be considered.
+  - The branch with Server side rendering (SSR) product lists and order lists is in the PR. The HTML are generated on the server then served on the frontend.
+    After create and update form submission, the related /products or /orders list cache are invalidated using revalidatepath to serve fresh data.
+    
 
 ## Followup
 - Add product categorization and product search.
