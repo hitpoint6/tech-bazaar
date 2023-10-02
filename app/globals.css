@@ -32,7 +32,7 @@
   @apply block bg-black text-white py-2 px-4 rounded-md mt-2
   }
   
-  .custom_button-outline {
+    .custom_button_outline {
     @apply block bg-white text-black outline outline-black py-2 px-4 rounded-md mt-2
   }
   

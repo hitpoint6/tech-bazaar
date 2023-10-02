@@ -9,7 +9,7 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<OrderProps>({
     _id: "",
     productId: "",
-    productName: "",
+    productName: "placerholder.png",
     productImage: "",
     price: 0,
     quantity: 0,
@@ -24,7 +24,7 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
     const orderRes = await fetch(`/api/orders/${orderId}`);
     const orderData = await orderRes.json();
 
-    setOrder(orderData);
+    setOrder({ ...order, ...orderData });
   }
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = e.target;
-    setOrder((prev) => ({ ...prev, [name]: value }));
+    setOrder({ ...order, [name]: value });
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -50,7 +50,8 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
       });
 
       if (response.ok) {
-        router.push("/orders");
+        const orderData = await response.json();
+        router.push(`/orders/${orderData._id}`);
       }
     } catch (error) {
       console.log(error);
@@ -67,7 +68,7 @@ function UpdateOrderForm({ orderId }: { orderId: string }) {
     <form onSubmit={handleSubmit} className="p-4 max-w-2xl">
       <p>Order Id: {order._id}</p>
       <OrderProductCard
-        image={order.productImage}
+        productImage={order.productImage}
         productId={order.productId}
         productName={order.productName}
         quantity={order.quantity}
