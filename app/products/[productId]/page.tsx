@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Link from "next/link";
 
-function productDetailPage({ params }: { params: { productId: string } }) {
+function ProductDetailPage({ params }: { params: { productId: string } }) {
   const productId = params.productId;
   const [product, setProduct] = useState<ProductProps>({
     _id: "",
@@ -39,4 +39,4 @@ function productDetailPage({ params }: { params: { productId: string } }) {
   );
 }
 
-export default productDetailPage;
+export default ProductDetailPage;

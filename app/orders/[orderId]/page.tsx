@@ -5,7 +5,7 @@ import { OrderProps } from "@/types/types";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 
-function orderDetailPage({ params }: { params: { orderId: string } }) {
+function OrderDetailPage({ params }: { params: { orderId: string } }) {
   const orderId = params.orderId;
   const [order, setOrder] = useState<OrderProps>({
     _id: "",
@@ -38,4 +38,4 @@ function orderDetailPage({ params }: { params: { orderId: string } }) {
   );
 }
 
-export default orderDetailPage;
+export default OrderDetailPage;
