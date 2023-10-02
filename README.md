@@ -25,17 +25,24 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
 
 ## Analysis
 - Scaling of the backend.
-  - The backend APIs are implemented in Nextjs's App Router. When building full stack with nextjs compared to nodejs + nextjs,
-    many duplicate code can be removed or reused.
-  - Typescript and Nodejs. Developing the frontend and backend in the same language can reduce context switch of full stack developers jumping between services.
+  - **Nextjs's App Router as the backend**  
+    When building full stack with nextjs compared to nodejs + nextjs,
+    many duplicate code can be removed or reused. However for complex use cases, more complex configuration may be needed.
+  - **Typescript and Nodejs**  
+    Developing the frontend and backend in the same language can reduce context switch of full stack developers jumping between services.
     Nodejs utilize event driven and non-blocking I/O, which is great for web servers and real-time applications.
-  - NoSQL database like mongodb allows for horizontal scaling or products and orders. Cloud Atlas mongodb allows for automatically scaling.
+  - **Database**  
+    NoSQL database like mongodb allows for horizontal scaling or products and orders. Cloud Atlas mongodb allows for automatically scaling.
     It does not have schema can be great for initial development as new fields are added to models.
-    However it is lack of ACID of SQL database and could potentially lead to duplicate orders. SQL databases should be partitioned when dealing
-    with the oders of millions of products. It will become harder to ensure ACID properties when partitioned.
-  - Serverless web servers like vercel allows automatically scale up and down by the amount of traffic.
-  - Implement pagination and infinite scroll can make sure the backend returns a manageable amount of items for each query.
+    However it is lack of ACID of SQL database and could potentially lead to duplicate orders.
+    SQL databases can be partitioned to store millions of orders and products. However it will be very challenging to ensure ACID properties when partitioned.
+  - **Serverless**  
+    Cloud service like vercel allows automatically scale up and down by the amount of traffic. But it has cold start times can cause poor user experience.
+  - **Optimization Design**  
+    Implement pagination and infinite scroll can make sure the backend returns a manageable amount of items for each query.
     However, it might be overwhelming for users to find a product. Categorization of products and search can be implemented to improve scalability.
+  - **Caching**  
+    Nextjs and React provides Request Memoization, Data Cache and Full Route Cache to improve low latency and scalability.
      
 - Choice of frontend technology. (hosting, caching, language, frameworks, styling)
   - Typescript allows static type checking compared to Javascript, which can help developers identify bugs earlier.
