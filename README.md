@@ -47,7 +47,7 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
   - Vercel. Vercel is serverless cloud platform has great integration with Nextjs. It can deploy a nextjs project with a few lines of code.
     It connects github repo and can automatically detect new commits on the repo and redeploy. While simplicity is the advantage, it is lack of configuration options.
     For more complex deployment, AWS of GCP can be considered.
-  - The branch with Server side rendering (SSR) product lists and order lists is in the PR. The HTML are generated on the server then served on the frontend.
+  - There is a pull request with Server side rendering (SSR) product lists and order lists in the repo. The HTML are generated on the server then served on the frontend.
     After create and update form submission, the related /products or /orders list cache are invalidated using revalidatepath to serve fresh data.
     
 
