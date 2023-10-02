@@ -4,6 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import { ProductProps } from "@/types/types";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
+import Link from "next/link";
 
 function productDetailPage({ params }: { params: { productId: string } }) {
   const productId = params.productId;
@@ -29,8 +30,11 @@ function productDetailPage({ params }: { params: { productId: string } }) {
 
   return (
     <div>
-      <Header title="Products" />
+      <Header title={`Product Detail ${product.name}`} />
       <ProductCard product={product} />
+      <Link href={`/`} className="mt-4 shift_up_card">
+        Back to Products
+      </Link>
     </div>
   );
 }

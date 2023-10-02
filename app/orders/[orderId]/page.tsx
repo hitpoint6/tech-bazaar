@@ -3,6 +3,7 @@
 import OrderCard from "@/components/OrderCard";
 import { OrderProps } from "@/types/types";
 import { useState, useEffect } from "react";
+import Header from "@/components/Header";
 
 function orderDetailPage({ params }: { params: { orderId: string } }) {
   const orderId = params.orderId;
@@ -31,7 +32,7 @@ function orderDetailPage({ params }: { params: { orderId: string } }) {
 
   return (
     <div>
-      <h1>Order Detail</h1>
+      <Header title="Order Detail" />
       <OrderCard order={order} />
     </div>
   );
