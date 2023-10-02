@@ -1,5 +1,6 @@
 # Tech Bazaar
-A online marketplace to buy and sell tech products.
+## A online marketplace to buy and sell tech products.  
+
 <img width="1367" alt="Screenshot 2023-10-02 at 9 22 04 AM" src="https://github.com/hitpoint6/tech-bazaar/assets/62563309/638c6ae7-b716-495f-950c-e838134782ab">
 
 
