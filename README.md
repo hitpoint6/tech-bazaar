@@ -44,6 +44,8 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
   - **Caching**  
     Nextjs and React provides Request Memoization, Data Cache and Full Route Cache to improve low latency and scalability.
   - **Followup Features**  
+    - Caching
+    - Server side rendering
     - Consider adding security features like authentication, authorization, data validation.
     - Monitoring and Logging
     - Unit testing and end-to-end testings
