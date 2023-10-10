@@ -24,7 +24,7 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
 - Written in **TypeScript**
 
 ## Analysis
-- Scaling of the backend.
+- Selection of backend tech.
   - **Nextjs's App Router as the backend**  
     When building full stack with nextjs compared to nodejs + nextjs,
     many duplicate code can be removed or reused. However for complex use cases, more complex configuration may be needed.
@@ -43,7 +43,8 @@ Live demo is up at vercel [Tech Bazaar](https://tech-bazaar-tkbx.vercel.app/)
     However, it might be overwhelming for users to find a product. Categorization of products and search can be implemented to improve scalability.
   - **Caching**  
     Nextjs and React provides Request Memoization, Data Cache and Full Route Cache to improve low latency and scalability.
-  - **Followup Features**  
+  - **Scale up considerations**  
+    - Split products and orders into microservices
     - Caching
     - Server side rendering
     - Consider adding security features like authentication, authorization, data validation.
